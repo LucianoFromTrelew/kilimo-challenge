@@ -1,13 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable, of } from "rxjs";
-import { map, catchError, tap } from "rxjs/operators";
+import { map, catchError } from "rxjs/operators";
 
 @Injectable({
   providedIn: "root"
 })
 export class MapsService {
-  private TOKEN = "AIzaSyCQVLQG1jmgQ-yyZEtPY4Ebdve82WohYDs";
+  private TOKEN = "AIzaSyDD7lKn0BROGfYr6wbqYOm7-mAeSHIq9mM";
   apiLoaded: Observable<boolean>;
 
   constructor(httpClient: HttpClient) {
@@ -17,9 +17,6 @@ export class MapsService {
         "callback"
       )
       .pipe(
-        tap(() => {
-          console.log("%cLoading maps", "background-color:blue; color:white");
-        }),
         map(() => true),
         catchError(() => of(false))
       );
