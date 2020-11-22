@@ -9,9 +9,4 @@ import { MapsService } from "./services/maps.service";
 })
 export class AppComponent {
   title = "kilimo-challenge";
-  isMapsApiLoaded: Observable<boolean>;
-
-  constructor(private mapsService: MapsService) {
-    this.isMapsApiLoaded = this.mapsService.apiLoaded;
-  }
 }

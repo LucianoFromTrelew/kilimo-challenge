@@ -10,9 +10,10 @@ import { HttpClientModule, HttpClientJsonpModule } from "@angular/common/http";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatTabsModule } from "@angular/material/tabs";
 import { HomeComponent } from "./pages/home/home.component";
+import { FarmsMapComponent } from './components/farms-map/farms-map.component';
 
 @NgModule({
-  declarations: [AppComponent, HomeComponent],
+  declarations: [AppComponent, HomeComponent, FarmsMapComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
