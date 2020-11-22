@@ -8,9 +8,11 @@ import { GoogleMapsModule } from "@angular/google-maps";
 import { HttpClientModule, HttpClientJsonpModule } from "@angular/common/http";
 
 import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatTabsModule } from "@angular/material/tabs";
+import { HomeComponent } from "./pages/home/home.component";
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, HomeComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -19,7 +21,8 @@ import { MatToolbarModule } from "@angular/material/toolbar";
     HttpClientJsonpModule,
     GoogleMapsModule,
     // angular material imports
-    MatToolbarModule
+    MatToolbarModule,
+    MatTabsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
