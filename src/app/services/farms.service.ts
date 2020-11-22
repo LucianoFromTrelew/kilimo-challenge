@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
+import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
 import { Farm, FarmData } from "../models/farm";
 
@@ -7,22 +8,23 @@ import { Farm, FarmData } from "../models/farm";
   providedIn: "root"
 })
 export class FarmsService {
-  private COLLECTION_NAME = "farms"
-  private farmsCollection = this.firestore.collection(this.COLLECTION_NAME)
+  private COLLECTION_NAME = "farms";
+  private farmsCollection = this.firestore.collection(this.COLLECTION_NAME);
 
-  constructor(private firestore: AngularFirestore) {
+  constructor(private firestore: AngularFirestore) {}
+
+  getFarms(): Observable<Farm[]> {
+    return this.farmsCollection.get().pipe(
+      map(docs =>
+        docs.docs.map(doc => {
+          return { id: doc.id, ...(doc.data() as FarmData) } as Farm;
+        })
+      )
+    );
   }
 
-  getFarms() {
-    return this.farmsCollection
-      .get()
-      .pipe(
-        map(docs =>
-          docs.docs.map(doc => {
-            return { id: doc.id, ...doc.data() as FarmData } as Farm;
-          })
-        )
-      );
-
+  async add(farmData: FarmData): Promise<string> {
+    const response = await this.farmsCollection.add(farmData);
+    return response.id;
   }
 }

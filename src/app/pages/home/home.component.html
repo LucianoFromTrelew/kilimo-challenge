@@ -1,9 +1,18 @@
-<h1>home works!</h1>
+<div fxLayout="row" fxLayoutAlign="space-between center">
+  <h1>home works!</h1>
+  <a
+    mat-fab
+    color="primary"
+    aria-label="Create new farm"
+    routerLink="/farms/new"
+  >
+    <mat-icon>add</mat-icon>
+  </a>
+</div>
 
 <mat-tab-group mat-align-tabs="center">
-  <mat-tab label="First">
+  <mat-tab label="Map">
     <app-farms-map></app-farms-map>
   </mat-tab>
-  <mat-tab label="Second">Content 2</mat-tab>
-  <mat-tab label="Third">Content 3</mat-tab>
+  <mat-tab label="Table">Display a table here</mat-tab>
 </mat-tab-group>

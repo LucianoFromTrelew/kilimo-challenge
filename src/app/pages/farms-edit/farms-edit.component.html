@@ -1,0 +1,82 @@
+<form [formGroup]="farmForm" (ngSubmit)="handleSubmit()">
+  <mat-form-field class="custom-mat-form-field">
+    <mat-label>Name: </mat-label>
+    <input matInput type="text" formControlName="name" required />
+    <mat-error *ngIf="farmForm.get('name')">{{
+      getErrorMessages("name")
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="custom-mat-form-field">
+    <mat-label>Acres: </mat-label>
+    <input matInput type="number" formControlName="acres" required />
+    <mat-error *ngIf="farmForm.get('acres')">{{
+      getErrorMessages("acres")
+    }}</mat-error>
+  </mat-form-field>
+
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    formGroupName="coordinates"
+  >
+    <mat-form-field class="custom-mat-form-field" style="margin-right: 1rem">
+      <mat-label>Latitude: </mat-label>
+      <input matInput type="number" formControlName="lat" required />
+      <mat-error *ngIf="farmForm.get('coordinates.lat')">{{
+        getErrorMessages("coordinates.lat")
+      }}</mat-error>
+    </mat-form-field>
+
+    <mat-form-field class="custom-mat-form-field">
+      <mat-label>Longitude: </mat-label>
+      <input matInput type="number" formControlName="lng" required />
+      <mat-error *ngIf="farmForm.get('coordinates.lng')">{{
+        getErrorMessages("coordinates.lng")
+      }}</mat-error>
+    </mat-form-field>
+  </div>
+
+  <google-map (mapClick)="handleMapClick($event)" width="100%">
+    <map-marker *ngIf="marker" [position]="marker"></map-marker>
+  </google-map>
+
+  <div
+    *ngIf="isSubmitting"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    style="margin-top: 2rem"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    style="margin-top: 2rem"
+  >
+    <button
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="handleCancel()"
+    >
+      Cancel
+    </button>
+
+    <div fxLayout="row" fxLayoutAlign="flex-end">
+      <button mat-raised-button type="button" (click)="handleReset()">
+        Reset
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="farmForm.invalid"
+        style="margin-left: 1rem"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

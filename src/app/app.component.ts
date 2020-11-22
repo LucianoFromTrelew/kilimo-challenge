@@ -1,6 +1,4 @@
 import { Component } from "@angular/core";
-import { Observable } from "rxjs";
-import { MapsService } from "./services/maps.service";
 
 @Component({
   selector: "app-root",
