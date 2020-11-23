@@ -16,6 +16,7 @@
       InfoWindow: function () {
         this.setContent = () => {};
         this.close = () => {};
+        this.setOptions = () => {};
       },
       LatLng: function (lat, lng) {
         this.lat = () => lat;

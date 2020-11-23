@@ -12,7 +12,7 @@
 
 <mat-tab-group mat-align-tabs="center">
   <mat-tab label="Map">
-    <app-farms-map></app-farms-map>
+    <app-farms-map [farms]="farms$ | async"></app-farms-map>
   </mat-tab>
   <mat-tab label="Table">Display a table here</mat-tab>
 </mat-tab-group>

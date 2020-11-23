@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
+import { FarmsDetailComponent } from "./pages/farms-detail/farms-detail.component";
 import { FarmsEditComponent } from "./pages/farms-edit/farms-edit.component";
 import { HomeComponent } from "./pages/home/home.component";
 
@@ -20,7 +21,8 @@ const routes: Routes = [
         path: "table",
         component: HomeComponent
       },
-      { path: "new", component: FarmsEditComponent }
+      { path: "new", component: FarmsEditComponent },
+      { path: ":id", component: FarmsDetailComponent }
     ]
   },
   { path: "", redirectTo: "farms/map", pathMatch: "full" }

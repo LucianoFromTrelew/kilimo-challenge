@@ -15,15 +15,17 @@ import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { HomeComponent } from "./pages/home/home.component";
 import { FarmsMapComponent } from "./components/farms-map/farms-map.component";
 import { environment } from "src/environments/environment";
-import { FarmsEditComponent } from "./pages/farms-edit/farms-edit.component";
 import { MaterialModule } from "./material/material.module";
+import { FarmsEditComponent } from "./pages/farms-edit/farms-edit.component";
+import { FarmsDetailComponent } from './pages/farms-detail/farms-detail.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     FarmsMapComponent,
-    FarmsEditComponent
+    FarmsEditComponent,
+    FarmsDetailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,1 +1,20 @@
-<google-map width="100%"></google-map>
+<google-map width="100%">
+  <map-marker
+    #marker="mapMarker"
+    *ngFor="let farm of farms"
+    [position]="farm.coordinates"
+    [title]="farm.name"
+    [options]="markerOptions"
+    (mapClick)="handleMarkerClick(farm, marker)"
+  ></map-marker>
+  <map-info-window
+    ><ul>
+      <li>Farm name: {{ selectedFarm?.name }}</li>
+      <li>Farm acres: {{ selectedFarm?.acres }}</li>
+      <li>
+        Accumulated precipitation: {{ selectedFarm?.accumulatedPrecipitations }}
+      </li>
+      <a [routerLink]="['/farms/', selectedFarm?.id]">View more</a>
+    </ul></map-info-window
+  >
+</google-map>

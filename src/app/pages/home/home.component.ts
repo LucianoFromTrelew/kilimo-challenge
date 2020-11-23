@@ -9,7 +9,9 @@ import { FarmsService } from "src/app/services/farms.service";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  constructor() {}
+  farms$ = this.farmsService.getFarms();
+
+  constructor(private farmsService: FarmsService) {}
 
   ngOnInit(): void {}
 }
