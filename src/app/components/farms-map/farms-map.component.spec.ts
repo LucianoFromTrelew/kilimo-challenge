@@ -1,16 +1,18 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { GoogleMapsModule } from "@angular/google-maps";
+import { MaterialModule } from "src/app/material/material.module";
 
-import { FarmsMapComponent } from './farms-map.component';
+import { FarmsMapComponent } from "./farms-map.component";
 
-describe('FarmsMapComponent', () => {
+describe("FarmsMapComponent", () => {
   let component: FarmsMapComponent;
   let fixture: ComponentFixture<FarmsMapComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FarmsMapComponent ]
-    })
-    .compileComponents();
+      imports: [GoogleMapsModule, MaterialModule],
+      declarations: [FarmsMapComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +21,7 @@ describe('FarmsMapComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });

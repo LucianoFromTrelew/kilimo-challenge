@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from "@angular/core";
-import { Observable } from "rxjs";
+import { Component, OnInit } from "@angular/core";
 
 @Component({
   selector: "app-farms-map",
@@ -7,7 +6,6 @@ import { Observable } from "rxjs";
   styleUrls: ["./farms-map.component.scss"]
 })
 export class FarmsMapComponent implements OnInit {
-
   constructor() {}
 
   ngOnInit(): void {}

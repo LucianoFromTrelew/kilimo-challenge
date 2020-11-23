@@ -8,5 +8,5 @@ export const environment = {
     storageBucket: "kilimo-challenge.appspot.com",
     messagingSenderId: "215638972223",
     appId: "1:215638972223:web:431e12f1620f7d5b38658a"
-  };
+  }
 };
