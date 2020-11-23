@@ -1,17 +1,8 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { Location } from "@angular/common";
-import { FarmData } from "src/app/models/farm";
+import { FarmFormValues } from "src/app/models/farm";
 import { FarmsService } from "src/app/services/farms.service";
-
-interface FarmFormValues {
-  name: string;
-  acres: number;
-  coordinates: {
-    lat: number;
-    lng: number;
-  };
-}
 
 @Component({
   selector: "app-farms-edit",
@@ -91,9 +82,9 @@ export class FarmsEditComponent implements OnInit {
     try {
       this.isSubmitting = true;
       const values = this.farmForm.value as FarmFormValues;
-      const farmData = values as FarmData;
 
-      await this.farmsService.add(farmData);
+      await this.farmsService.add(values);
+
       alert("Farm created successfully!");
       this.location.back();
     } catch (error) {

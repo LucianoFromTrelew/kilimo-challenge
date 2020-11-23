@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Observable } from "rxjs";
 import { map } from "rxjs/operators";
-import { Farm, FarmData } from "../models/farm";
+import { Farm, FarmData, FarmFormValues } from "../models/farm";
 
 @Injectable({
   providedIn: "root"
@@ -23,7 +23,11 @@ export class FarmsService {
     );
   }
 
-  async add(farmData: FarmData): Promise<string> {
+  async add(farmFormValues: FarmFormValues): Promise<string> {
+    const farmData: FarmData = {
+      ...farmFormValues,
+      accumulatedPrecipitations: 0
+    };
     const response = await this.farmsCollection.add(farmData);
     return response.id;
   }

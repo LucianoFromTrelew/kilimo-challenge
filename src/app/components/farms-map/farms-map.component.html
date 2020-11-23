@@ -9,12 +9,23 @@
   ></map-marker>
   <map-info-window
     ><ul>
-      <li>Farm name: {{ selectedFarm?.name }}</li>
-      <li>Farm acres: {{ selectedFarm?.acres }}</li>
-      <li>
-        Accumulated precipitation: {{ selectedFarm?.accumulatedPrecipitations }}
+      <li class="info-window--item">
+        <strong>Farm name</strong>: {{ selectedFarm?.name }}
       </li>
-      <a [routerLink]="['/farms/', selectedFarm?.id]">View more</a>
+      <li class="info-window--item">
+        <strong>Farm acres</strong>: {{ selectedFarm?.acres }}
+      </li>
+      <li class="info-window--item">
+        <strong>Accumulated precipitations</strong>:
+        {{ selectedFarm?.accumulatedPrecipitations }}
+      </li>
+      <strong>
+        <a
+          [routerLink]="['/farms/', selectedFarm?.id]"
+          class="info-window--item"
+          >View more</a
+        >
+      </strong>
     </ul></map-info-window
   >
 </google-map>

@@ -14,5 +14,7 @@
   <mat-tab label="Map">
     <app-farms-map [farms]="farms$ | async"></app-farms-map>
   </mat-tab>
-  <mat-tab label="Table">Display a table here</mat-tab>
+  <mat-tab label="Table">
+    <app-farms-table [farms]="farms$ | async"></app-farms-table>
+  </mat-tab>
 </mat-tab-group>

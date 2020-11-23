@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from "@angular/core";
-import { MapAnchorPoint, MapInfoWindow, MapMarker } from "@angular/google-maps";
+import { MapInfoWindow, MapMarker } from "@angular/google-maps";
 import { Farm } from "src/app/models/farm";
 
 @Component({

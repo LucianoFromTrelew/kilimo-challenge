@@ -1,0 +1,48 @@
+<mat-form-field style="display: block">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Filter farms..." />
+</mat-form-field>
+
+<div class="mat-elevation-z8">
+  <table mat-table class="full-width-table" matSort aria-label="Elements">
+    <!-- Name Column -->
+    <ng-container matColumnDef="name">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Name</th>
+      <td mat-cell *matCellDef="let row">
+        <strong>
+          <a [routerLink]="['/farms/', row.id]" class="info-window--item">{{
+            row.name
+          }}</a>
+        </strong>
+      </td>
+    </ng-container>
+
+    <!-- Acres Column -->
+    <ng-container matColumnDef="acres">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>Acres</th>
+      <td mat-cell *matCellDef="let row">{{ row.acres }}</td>
+    </ng-container>
+
+    <!-- Accumulated precipitations Column -->
+    <ng-container matColumnDef="accumulatedPrecipitations">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        Accumulated precipitations
+      </th>
+      <td mat-cell *matCellDef="let row">
+        {{ row.accumulatedPrecipitations }}
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <mat-paginator
+    #paginator
+    [length]="dataSource?.data.length"
+    [pageIndex]="0"
+    [pageSize]="10"
+    [pageSizeOptions]="[10, 25, 50]"
+  >
+  </mat-paginator>
+</div>

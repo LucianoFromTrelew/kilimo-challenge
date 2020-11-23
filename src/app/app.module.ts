@@ -7,17 +7,18 @@ import { AppComponent } from "./app.component";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 import { GoogleMapsModule } from "@angular/google-maps";
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { environment } from "src/environments/environment";
 
 // Firebase
 import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 
-import { HomeComponent } from "./pages/home/home.component";
-import { FarmsMapComponent } from "./components/farms-map/farms-map.component";
-import { environment } from "src/environments/environment";
 import { MaterialModule } from "./material/material.module";
+import { HomeComponent } from "./pages/home/home.component";
 import { FarmsEditComponent } from "./pages/farms-edit/farms-edit.component";
-import { FarmsDetailComponent } from './pages/farms-detail/farms-detail.component';
+import { FarmsDetailComponent } from "./pages/farms-detail/farms-detail.component";
+import { FarmsMapComponent } from "./components/farms-map/farms-map.component";
+import { FarmsTableComponent } from "./components/farms-table/farms-table.component";
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { FarmsDetailComponent } from './pages/farms-detail/farms-detail.componen
     HomeComponent,
     FarmsMapComponent,
     FarmsEditComponent,
-    FarmsDetailComponent
+    FarmsDetailComponent,
+    FarmsTableComponent
   ],
   imports: [
     BrowserModule,
