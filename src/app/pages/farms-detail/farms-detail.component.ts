@@ -1,10 +1,9 @@
-import { Location, LocationChangeEvent } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, combineLatest } from "rxjs";
-import { filter, switchMap } from "rxjs/operators";
+import { filter, share, switchMap } from "rxjs/operators";
 import { PrecipitationsEditFormDialogComponent } from "src/app/components/precipitations-edit-form-dialog/precipitations-edit-form-dialog.component";
 import { URLS } from "src/app/constants";
 import { FarmsService } from "src/app/services/farms.service";
@@ -25,8 +24,10 @@ export class FarmsDetailComponent implements OnInit {
     filter(([_, shouldFetch]) => shouldFetch),
     switchMap(([params]) => {
       this.farmId = params.id;
+      this.shouldFetch.next(false);
       return this.farmsService.getOne(params.id);
-    })
+    }),
+    share()
   );
 
   precipitations$ = this.farm$.pipe(

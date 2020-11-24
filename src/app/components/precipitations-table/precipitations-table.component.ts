@@ -67,7 +67,7 @@ export class PrecipitationsTableComponent implements OnChanges, AfterViewInit {
 
   async handleDeletePrecipitationClick(precipitationId: string) {
     const result = confirm(
-      "Are you sure you want to delete this precipitation"
+      "Are you sure you want to delete this precipitation?"
     );
 
     if (result) {

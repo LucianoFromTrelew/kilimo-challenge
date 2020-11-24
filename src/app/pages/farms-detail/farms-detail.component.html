@@ -35,7 +35,7 @@
 >
   Expected precipitations for next
   <strong>{{ expectedPrecipitationsDays }} days</strong>:
-  {{ expectedPrecipitations }}mm
+  {{ expectedPrecipitations | number: ".2-2" }}mm
 </p>
 
 <app-precipitations-table

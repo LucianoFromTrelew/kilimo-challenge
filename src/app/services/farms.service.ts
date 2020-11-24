@@ -39,6 +39,12 @@ export class FarmsService {
     return response.id;
   }
 
+  async update(farmId: string, farmFormValues: FarmFormValues) {
+    return this.farmsCollection
+      .doc(farmId)
+      .set(farmFormValues, { merge: true });
+  }
+
   delete(farmId: string) {
     return this.farmsCollection.doc(farmId).delete();
   }

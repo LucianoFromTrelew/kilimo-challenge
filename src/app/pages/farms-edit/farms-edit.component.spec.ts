@@ -3,6 +3,7 @@ import { AngularFireModule } from "@angular/fire";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { ReactiveFormsModule } from "@angular/forms";
 import { GoogleMapsModule } from "@angular/google-maps";
+import { RouterTestingModule } from "@angular/router/testing";
 import { MaterialModule } from "src/app/material/material.module";
 import { environment } from "src/environments/environment";
 
@@ -15,6 +16,7 @@ describe("FarmsEditComponent", () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
+        RouterTestingModule,
         GoogleMapsModule,
         ReactiveFormsModule,
         MaterialModule,

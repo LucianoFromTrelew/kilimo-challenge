@@ -1,4 +1,4 @@
-<form [formGroup]="farmForm" (ngSubmit)="handleSubmit()">
+<form *ngIf="!isLoading" [formGroup]="farmForm" (ngSubmit)="handleSubmit()">
   <mat-form-field class="custom-mat-form-field">
     <mat-label>Name: </mat-label>
     <input matInput type="text" formControlName="name" required />
