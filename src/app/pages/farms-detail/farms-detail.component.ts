@@ -1,5 +1,6 @@
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
+import { MatSnackBar } from "@angular/material/snack-bar";
 import { ActivatedRoute } from "@angular/router";
 import { BehaviorSubject, combineLatest } from "rxjs";
 import { filter, switchMap } from "rxjs/operators";
@@ -44,7 +45,8 @@ export class FarmsDetailComponent implements OnInit {
     private route: ActivatedRoute,
     private farmsService: FarmsService,
     private precipitationsService: PrecipitationsService,
-    private dialog: MatDialog
+    private dialog: MatDialog,
+    private snackBar: MatSnackBar
   ) {}
 
   ngOnInit(): void {}
@@ -59,5 +61,17 @@ export class FarmsDetailComponent implements OnInit {
         this.shouldFetch.next(true);
       }
     });
+  }
+
+  async handleDeletePrecipitation(precipitationId: string) {
+    try {
+      await this.precipitationsService.delete(this.farmId, precipitationId);
+
+      this.snackBar.open("Precipitation deleted successfully!");
+
+      this.shouldFetch.next(true);
+    } catch (error) {
+      this.snackBar.open("Could not delete precipitation");
+    }
   }
 }

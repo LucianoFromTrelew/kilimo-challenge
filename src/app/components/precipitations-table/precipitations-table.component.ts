@@ -1,8 +1,10 @@
 import {
   AfterViewInit,
   Component,
+  EventEmitter,
   Input,
   OnChanges,
+  Output,
   SimpleChanges,
   ViewChild
 } from "@angular/core";
@@ -12,6 +14,7 @@ import { MatTable, MatTableDataSource } from "@angular/material/table";
 import { Precipitation } from "src/app/models/precipitation";
 
 export interface PrecipitationsTableItem {
+  id: string;
   date: Date;
   millimeters: number;
 }
@@ -27,13 +30,14 @@ export class PrecipitationsTableComponent implements OnChanges, AfterViewInit {
   @ViewChild(MatTable) table: MatTable<PrecipitationsTableItem>;
 
   @Input() precipitations: Precipitation[];
+  @Output("delete") onDeletePrecipitation = new EventEmitter<string>();
 
   dataSource = new MatTableDataSource<PrecipitationsTableItem>();
   accumulatedPrecipitations = 0;
   isReady = false;
 
   /** Columns displayed in the table. Columns IDs can be added, removed, or reordered. */
-  displayedColumns = ["date", "millimeters"];
+  displayedColumns = ["date", "millimeters", "actions"];
 
   ngAfterViewInit(): void {
     this.dataSource.sort = this.sort;
@@ -59,5 +63,15 @@ export class PrecipitationsTableComponent implements OnChanges, AfterViewInit {
   applyFilter(event: Event) {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
+  async handleDeletePrecipitationClick(precipitationId: string) {
+    const result = confirm(
+      "Are you sure you want to delete this precipitation"
+    );
+
+    if (result) {
+      this.onDeletePrecipitation.emit(precipitationId);
+    }
   }
 }

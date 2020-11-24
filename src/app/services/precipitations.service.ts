@@ -1,7 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFirestore } from "@angular/fire/firestore";
-import firebase from "firebase";
-import { of } from "rxjs";
+import firebase from "firebase/app";
 import { map } from "rxjs/operators";
 import {
   Precipitation,
@@ -52,7 +51,38 @@ export class PrecipitationsService {
     return response.id;
   }
 
+  async delete(farmId: string, precipitationId: string) {
+    const farmRef = this.farmsCollection.doc(farmId);
+    const precipitationRef = farmRef
+      .collection(this.PRECIPITATIONS_COLLECTION_NAME)
+      .doc(precipitationId);
+
+    const precipitationData = (
+      await precipitationRef.get().toPromise()
+    ).data() as PrecipitationData;
+
+    await farmRef.update({
+      accumulatedPrecipitations: firebase.firestore.FieldValue.increment(
+        -precipitationData.millimeters
+      )
+    });
+
+    await precipitationRef.delete();
+  }
+
   getExpectedPrecipitations(farmId: string, days: number) {
-    return of(200);
+    return this.farmsCollection
+      .doc(farmId)
+      .collection(this.PRECIPITATIONS_COLLECTION_NAME)
+      .get()
+      .pipe(
+        map(docs =>
+          docs.docs
+            .map(docToPrecipitation)
+            .map(precipitationData => precipitationData.millimeters)
+            .reduce((acc, val) => acc + val, 0)
+        ),
+        map(accumulatedPrecipitations => accumulatedPrecipitations / days)
+      );
   }
 }

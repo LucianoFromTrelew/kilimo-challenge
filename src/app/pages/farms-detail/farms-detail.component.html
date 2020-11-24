@@ -40,4 +40,5 @@
 
 <app-precipitations-table
   [precipitations]="precipitations$ | async"
+  (delete)="handleDeletePrecipitation($event)"
 ></app-precipitations-table>
