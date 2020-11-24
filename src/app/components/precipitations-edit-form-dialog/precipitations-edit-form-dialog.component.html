@@ -1,0 +1,65 @@
+<p>precipitations-edit-form-dialog works!</p>
+<form [formGroup]="precipitationForm" (ngSubmit)="handleSubmit()">
+  <mat-form-field appearance="fill" class="custom-mat-form-field">
+    <mat-label>Choose a date</mat-label>
+    <input
+      matInput
+      [matDatepickerFilter]="filterDatesGreaterThanToday"
+      [matDatepicker]="picker"
+      formControlName="date"
+      required
+    />
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+    <mat-error *ngIf="precipitationForm.get('date')">{{
+      getErrorMessages("date")
+    }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field class="custom-mat-form-field">
+    <mat-label>Millimeters: </mat-label>
+    <input matInput type="number" formControlName="millimeters" required />
+    <mat-error *ngIf="precipitationForm.get('millimeters')">{{
+      getErrorMessages("millimeters")
+    }}</mat-error>
+  </mat-form-field>
+
+  <div
+    *ngIf="isSubmitting"
+    fxLayout="row"
+    fxLayoutAlign="center center"
+    style="margin-top: 2rem"
+  >
+    <mat-spinner></mat-spinner>
+  </div>
+
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    style="margin-top: 2rem"
+  >
+    <button
+      mat-raised-button
+      color="warn"
+      type="button"
+      (click)="handleCancel()"
+    >
+      Cancel
+    </button>
+
+    <div fxLayout="row" fxLayoutAlign="flex-end">
+      <button mat-raised-button type="button" (click)="handleReset()">
+        Reset
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        type="submit"
+        [disabled]="precipitationForm.invalid"
+        style="margin-left: 1rem"
+      >
+        Submit
+      </button>
+    </div>
+  </div>
+</form>

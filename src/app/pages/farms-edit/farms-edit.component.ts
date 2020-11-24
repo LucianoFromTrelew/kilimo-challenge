@@ -88,7 +88,7 @@ export class FarmsEditComponent implements OnInit {
       alert("Farm created successfully!");
       this.location.back();
     } catch (error) {
-      alert("Could not create farm successfully!");
+      alert("Could not create farm");
     } finally {
       this.isSubmitting = false;
     }

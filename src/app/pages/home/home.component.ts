@@ -9,7 +9,7 @@ import { FarmsService } from "src/app/services/farms.service";
   styleUrls: ["./home.component.scss"]
 })
 export class HomeComponent implements OnInit {
-  farms$ = this.farmsService.getFarms();
+  farms$ = this.farmsService.getAll();
 
   constructor(private farmsService: FarmsService) {}
 

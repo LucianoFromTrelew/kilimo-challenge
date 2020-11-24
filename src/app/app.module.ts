@@ -19,6 +19,8 @@ import { FarmsEditComponent } from "./pages/farms-edit/farms-edit.component";
 import { FarmsDetailComponent } from "./pages/farms-detail/farms-detail.component";
 import { FarmsMapComponent } from "./components/farms-map/farms-map.component";
 import { FarmsTableComponent } from "./components/farms-table/farms-table.component";
+import { PrecipitationsTableComponent } from './components/precipitations-table/precipitations-table.component';
+import { PrecipitationsEditFormDialogComponent } from './components/precipitations-edit-form-dialog/precipitations-edit-form-dialog.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +29,9 @@ import { FarmsTableComponent } from "./components/farms-table/farms-table.compon
     FarmsMapComponent,
     FarmsEditComponent,
     FarmsDetailComponent,
-    FarmsTableComponent
+    FarmsTableComponent,
+    PrecipitationsTableComponent,
+    PrecipitationsEditFormDialogComponent
   ],
   imports: [
     BrowserModule,
@@ -40,9 +44,10 @@ import { FarmsTableComponent } from "./components/farms-table/farms-table.compon
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFirestoreModule,
     // Angular Material imports
-    MaterialModule
+    MaterialModule,
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  entryComponents: [PrecipitationsEditFormDialogComponent]
 })
 export class AppModule {}

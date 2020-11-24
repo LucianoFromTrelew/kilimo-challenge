@@ -1,7 +1,8 @@
-export interface PrecipitationData {
+export interface PrecipitationFormValues {
   date: Date;
-  millimiters: number;
+  millimeters: number;
 }
+export interface PrecipitationData extends PrecipitationFormValues {}
 
 export interface Precipitation extends PrecipitationData {
   id: string;

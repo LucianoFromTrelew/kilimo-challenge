@@ -1,16 +1,26 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { AngularFireModule } from "@angular/fire";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+import { RouterTestingModule } from "@angular/router/testing";
+import { MaterialModule } from "src/app/material/material.module";
+import { environment } from "src/environments/environment";
 
-import { FarmsDetailComponent } from './farms-detail.component';
+import { FarmsDetailComponent } from "./farms-detail.component";
 
-describe('FarmsDetailComponent', () => {
+describe("FarmsDetailComponent", () => {
   let component: FarmsDetailComponent;
   let fixture: ComponentFixture<FarmsDetailComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FarmsDetailComponent ]
-    })
-    .compileComponents();
+      imports: [
+        MaterialModule,
+        RouterTestingModule,
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFirestoreModule
+      ],
+      declarations: [FarmsDetailComponent]
+    }).compileComponents();
   });
 
   beforeEach(() => {
@@ -19,7 +29,7 @@ describe('FarmsDetailComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it("should create", () => {
     expect(component).toBeTruthy();
   });
 });
