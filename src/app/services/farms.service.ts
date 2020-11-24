@@ -38,4 +38,8 @@ export class FarmsService {
 
     return response.id;
   }
+
+  delete(farmId: string) {
+    return this.farmsCollection.doc(farmId).delete();
+  }
 }

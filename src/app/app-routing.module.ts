@@ -22,7 +22,14 @@ const routes: Routes = [
         component: HomeComponent
       },
       { path: "new", component: FarmsEditComponent },
-      { path: ":id", component: FarmsDetailComponent }
+      {
+        path: ":id",
+        component: FarmsDetailComponent
+      },
+      {
+        path: ":id/edit",
+        component: FarmsEditComponent
+      }
     ]
   },
   { path: "", redirectTo: "farms/map", pathMatch: "full" }

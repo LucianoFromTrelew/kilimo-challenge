@@ -42,3 +42,30 @@
   [precipitations]="precipitations$ | async"
   (delete)="handleDeletePrecipitation($event)"
 ></app-precipitations-table>
+
+<mat-divider></mat-divider>
+
+<div
+  *ngIf="farm$ | async as farm"
+  fxLayout="row"
+  fxLayoutAlign="flex-end center"
+  style="margin: 1rem 0"
+>
+  <button
+    mat-fab
+    color="warn"
+    aria-label="Delete farm"
+    (click)="handleDeleteFarmClick(farm.id)"
+  >
+    <mat-icon>delete</mat-icon>
+  </button>
+  <a
+    mat-fab
+    color="info"
+    aria-label="Edit farm"
+    style="margin-left: 1rem"
+    [routerLink]="['/farms/', farm.id, 'edit']"
+  >
+    <mat-icon>edit</mat-icon>
+  </a>
+</div>

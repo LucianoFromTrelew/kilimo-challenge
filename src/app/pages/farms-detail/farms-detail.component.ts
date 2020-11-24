@@ -1,10 +1,12 @@
+import { Location, LocationChangeEvent } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { MatDialog } from "@angular/material/dialog";
 import { MatSnackBar } from "@angular/material/snack-bar";
-import { ActivatedRoute } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { BehaviorSubject, combineLatest } from "rxjs";
 import { filter, switchMap } from "rxjs/operators";
 import { PrecipitationsEditFormDialogComponent } from "src/app/components/precipitations-edit-form-dialog/precipitations-edit-form-dialog.component";
+import { URLS } from "src/app/constants";
 import { FarmsService } from "src/app/services/farms.service";
 import { PrecipitationsService } from "src/app/services/precipitations.service";
 
@@ -46,7 +48,8 @@ export class FarmsDetailComponent implements OnInit {
     private farmsService: FarmsService,
     private precipitationsService: PrecipitationsService,
     private dialog: MatDialog,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router: Router
   ) {}
 
   ngOnInit(): void {}
@@ -72,6 +75,22 @@ export class FarmsDetailComponent implements OnInit {
       this.shouldFetch.next(true);
     } catch (error) {
       this.snackBar.open("Could not delete precipitation");
+    }
+  }
+
+  async handleDeleteFarmClick(farmId: string) {
+    const result = confirm("Are you sure you want to delete this farm?");
+
+    if (result) {
+      try {
+        await this.farmsService.delete(farmId);
+
+        this.snackBar.open("Farm deleted successfully!");
+
+        this.router.navigateByUrl(URLS.ROOT);
+      } catch (error) {
+        this.snackBar.open("Could not delete farm");
+      }
     }
   }
 }
