@@ -15,6 +15,9 @@
     <app-farms-map [farms]="farms$ | async"></app-farms-map>
   </mat-tab>
   <mat-tab label="Table">
-    <app-farms-table [farms]="farms$ | async"></app-farms-table>
+    <app-farms-table
+      [farms]="farms$ | async"
+      (delete)="handleDeleteFarm($event)"
+    ></app-farms-table>
   </mat-tab>
 </mat-tab-group>
