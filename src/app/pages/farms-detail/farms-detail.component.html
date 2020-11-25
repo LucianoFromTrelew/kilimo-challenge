@@ -1,72 +1,74 @@
-<div
-  *ngIf="farm$ | async as farm"
-  fxLayout="row wrap"
-  fxLayoutAlign="space-between center"
-  class="farms-detail--header"
->
-  <p><strong>Name</strong>: {{ farm.name }}</p>
-  <p><strong>Acres</strong>: {{ farm.acres }}</p>
-  <p>
-    <strong>Accumulated Precipitations</strong>:
-    {{ farm.accumulatedPrecipitations }}mm
+<ng-container *ngIf="farm$ | async as farm; else loading">
+  <div
+    fxLayout="row wrap"
+    fxLayoutAlign="space-between center"
+    class="farms-detail--header"
+  >
+    <p><strong>Name</strong>: {{ farm.name }}</p>
+    <p><strong>Acres</strong>: {{ farm.acres }}</p>
+    <p>
+      <strong>Accumulated Precipitations</strong>:
+      {{ farm.accumulatedPrecipitations }}mm
+    </p>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div
+    fxLayout="row"
+    fxLayoutAlign="space-between center"
+    style="margin-top: 2rem"
+  >
+    <h1>Precipitations</h1>
+    <button
+      mat-fab
+      color="primary"
+      aria-label="Create new precipitation"
+      (click)="handleDisplayPrecipitationEditDialogClick()"
+    >
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+
+  <p
+    style="font-size: 1.2rem"
+    *ngIf="expectedPrecipitations$ | async as expectedPrecipitations"
+  >
+    Expected precipitations for next
+    <strong>{{ expectedPrecipitationsDays }} days</strong>:
+    {{ expectedPrecipitations | number: ".2-2" }}mm
   </p>
-</div>
 
-<mat-divider></mat-divider>
+  <app-precipitations-table
+    [precipitations]="precipitations$ | async"
+    (delete)="handleDeletePrecipitation($event)"
+  ></app-precipitations-table>
 
-<div
-  fxLayout="row"
-  fxLayoutAlign="space-between center"
-  style="margin-top: 2rem"
->
-  <h1>Precipitations</h1>
-  <button
-    mat-fab
-    color="primary"
-    aria-label="Create new precipitation"
-    (click)="handleDisplayPrecipitationEditDialogClick()"
-  >
-    <mat-icon>add</mat-icon>
-  </button>
-</div>
+  <mat-divider></mat-divider>
 
-<p
-  style="font-size: 1.2rem"
-  *ngIf="expectedPrecipitations$ | async as expectedPrecipitations"
->
-  Expected precipitations for next
-  <strong>{{ expectedPrecipitationsDays }} days</strong>:
-  {{ expectedPrecipitations | number: ".2-2" }}mm
-</p>
+  <div fxLayout="row" fxLayoutAlign="flex-end center" style="margin: 1rem 0">
+    <button
+      mat-fab
+      color="warn"
+      aria-label="Delete farm"
+      (click)="handleDeleteFarmClick(farm.id)"
+    >
+      <mat-icon>delete</mat-icon>
+    </button>
+    <a
+      mat-fab
+      color="info"
+      aria-label="Edit farm"
+      style="margin-left: 1rem"
+      [routerLink]="['/farms/', farm.id, 'edit']"
+    >
+      <mat-icon>edit</mat-icon>
+    </a>
+  </div>
+</ng-container>
 
-<app-precipitations-table
-  [precipitations]="precipitations$ | async"
-  (delete)="handleDeletePrecipitation($event)"
-></app-precipitations-table>
-
-<mat-divider></mat-divider>
-
-<div
-  *ngIf="farm$ | async as farm"
-  fxLayout="row"
-  fxLayoutAlign="flex-end center"
-  style="margin: 1rem 0"
->
-  <button
-    mat-fab
-    color="warn"
-    aria-label="Delete farm"
-    (click)="handleDeleteFarmClick(farm.id)"
-  >
-    <mat-icon>delete</mat-icon>
-  </button>
-  <a
-    mat-fab
-    color="info"
-    aria-label="Edit farm"
-    style="margin-left: 1rem"
-    [routerLink]="['/farms/', farm.id, 'edit']"
-  >
-    <mat-icon>edit</mat-icon>
-  </a>
-</div>
+<ng-template #loading>
+  <div fxLayout="row" fxLayoutAlign="center center" style="min-height: 50vh">
+    <mat-spinner></mat-spinner>
+  </div>
+</ng-template>
