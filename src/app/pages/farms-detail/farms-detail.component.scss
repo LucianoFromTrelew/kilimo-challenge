@@ -1,0 +1,13 @@
+:host {
+  h1 {
+    font-size: 1.2rem;
+  }
+}
+
+.farms-detail {
+  &--header {
+    p {
+      font-size: 1.25rem;
+    }
+  }
+}
