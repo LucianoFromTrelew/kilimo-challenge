@@ -10,7 +10,11 @@
   </a>
 </div>
 
-<mat-tab-group mat-align-tabs="center">
+<mat-tab-group
+  mat-align-tabs="center"
+  [selectedIndex]="selectedIndex"
+  (selectedIndexChange)="handleSelectedIndexChange($event)"
+>
   <mat-tab label="Map">
     <app-farms-map [farms]="farms$ | async"></app-farms-map>
   </mat-tab>

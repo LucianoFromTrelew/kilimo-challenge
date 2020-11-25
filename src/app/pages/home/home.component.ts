@@ -1,7 +1,9 @@
+import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { BehaviorSubject } from "rxjs";
 import { filter, share, switchMap } from "rxjs/operators";
+import { URLS } from "src/app/constants";
 import { FarmsService } from "src/app/services/farms.service";
 
 @Component({
@@ -11,6 +13,7 @@ import { FarmsService } from "src/app/services/farms.service";
 })
 export class HomeComponent implements OnInit {
   shouldFetch = new BehaviorSubject(true);
+  selectedIndex = 0;
 
   farms$ = this.shouldFetch.pipe(
     filter(shouldFetch => shouldFetch),
@@ -23,8 +26,13 @@ export class HomeComponent implements OnInit {
 
   constructor(
     private farmsService: FarmsService,
-    private snackBar: MatSnackBar
-  ) {}
+    private snackBar: MatSnackBar,
+    private location: Location
+  ) {
+    if (this.location.path().match(URLS.FARMS_TABLE)) {
+      this.selectedIndex = 1;
+    }
+  }
 
   ngOnInit(): void {}
 
@@ -38,5 +46,10 @@ export class HomeComponent implements OnInit {
     } catch (error) {
       this.snackBar.open("Could not delete farm");
     }
+  }
+
+  handleSelectedIndexChange(index: number) {
+    if (index === 0) this.location.replaceState(URLS.FARMS_MAP);
+    if (index === 1) this.location.replaceState(URLS.FARMS_TABLE);
   }
 }
