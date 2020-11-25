@@ -2,7 +2,7 @@ import { Location } from "@angular/common";
 import { Component, OnInit } from "@angular/core";
 import { MatSnackBar } from "@angular/material/snack-bar";
 import { BehaviorSubject } from "rxjs";
-import { filter, share, switchMap } from "rxjs/operators";
+import { filter, shareReplay, switchMap } from "rxjs/operators";
 import { URLS } from "src/app/constants";
 import { FarmsService } from "src/app/services/farms.service";
 
@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
       this.shouldFetch.next(false);
       return this.farmsService.getAll();
     }),
-    share()
+    shareReplay()
   );
 
   constructor(
